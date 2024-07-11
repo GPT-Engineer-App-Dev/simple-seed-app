@@ -2,11 +2,17 @@ import { useActivities } from "@/integrations/supabase";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatDistanceToNow } from "date-fns";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const ActivityFeed = () => {
   const { data: activities, error, isLoading } = useActivities();
-  const [activityList, setActivityList] = useState(activities || []);
+  const [activityList, setActivityList] = useState([]);
+
+  useEffect(() => {
+    if (activities) {
+      setActivityList(activities);
+    }
+  }, [activities]);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading activities</div>;
