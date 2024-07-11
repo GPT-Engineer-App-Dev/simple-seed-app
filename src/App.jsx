@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Home, Info, Mail, Activity } from "lucide-react";
+import { Activity } from "lucide-react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Layout from "./layouts/navbar"; // Use the navbar layout
 import Index from "./pages/Index.jsx";
@@ -12,21 +12,6 @@ import ActivityFeed from "./pages/ActivityFeed.jsx";
 const queryClient = new QueryClient();
 
 export const navItems = [
-  {
-    title: "Home",
-    to: "/",
-    icon: <Home className="h-4 w-4" />,
-  },
-  {
-    title: "About",
-    to: "/about",
-    icon: <Info className="h-4 w-4" />,
-  },
-  {
-    title: "Contact",
-    to: "/contact",
-    icon: <Mail className="h-4 w-4" />,
-  },
   {
     title: "Activity Feed",
     to: "/activity-feed",
