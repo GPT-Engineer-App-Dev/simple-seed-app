@@ -14,7 +14,7 @@ const queryClient = new QueryClient();
 export const navItems = [
   {
     title: "Activity Feed",
-    to: "/activity-feed",
+    to: "/",
     icon: <Activity className="h-4 w-4" />,
   },
 ];
@@ -27,10 +27,9 @@ const App = () => {
         <Router>
           <Routes>
             <Route path="/" element={<Layout />}>
-              <Route index element={<Index />} />
+              <Route index element={<ActivityFeed />} />
               <Route path="about" element={<About />} />
               <Route path="contact" element={<Contact />} />
-              <Route path="activity-feed" element={<ActivityFeed />} />
             </Route>
           </Routes>
         </Router>
