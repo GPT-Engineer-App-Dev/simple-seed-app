@@ -4,9 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
+const activityTypes = ["Running", "Cycling", "Swimming", "Hiking", "Walking"];
 
 const CreateActivity = () => {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, setValue } = useForm();
   const { mutate: addActivity, isLoading, error } = useAddActivity();
 
   const onSubmit = (data) => {
@@ -26,7 +29,18 @@ const CreateActivity = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
             <Label htmlFor="type">Type</Label>
-            <Input id="type" {...register("type", { required: true })} />
+            <Select onValueChange={(value) => setValue("type", value)}>
+              <SelectTrigger id="type">
+                <SelectValue placeholder="Select activity type" />
+              </SelectTrigger>
+              <SelectContent>
+                {activityTypes.map((type) => (
+                  <SelectItem key={type} value={type}>
+                    {type}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
           <div>
             <Label htmlFor="started_at">Started At</Label>
