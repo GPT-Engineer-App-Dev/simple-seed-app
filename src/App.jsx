@@ -8,13 +8,14 @@ import About from "./pages/About.jsx";
 import Contact from "./pages/Contact.jsx";
 import ActivityFeed from "./pages/ActivityFeed.jsx";
 import CreateActivity from "./pages/CreateActivity.jsx";
+import Index from "./pages/Index.jsx";
 
 const queryClient = new QueryClient();
 
 export const navItems = [
   {
     title: "Activity Feed",
-    to: "/",
+    to: "/activity-feed",
     icon: <Activity className="h-4 w-4" />,
   },
   {
@@ -32,9 +33,10 @@ const App = () => {
         <Router>
           <Routes>
             <Route path="/" element={<Layout />}>
-              <Route index element={<ActivityFeed />} />
+              <Route index element={<Index />} />
               <Route path="about" element={<About />} />
               <Route path="contact" element={<Contact />} />
+              <Route path="activity-feed" element={<ActivityFeed />} />
               <Route path="create-activity" element={<CreateActivity />} />
             </Route>
           </Routes>
