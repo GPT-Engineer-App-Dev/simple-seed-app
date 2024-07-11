@@ -120,3 +120,9 @@ export const useDeleteUser = () => {
         },
     });
 };
+
+// Hook for fetching activity types
+export const useActivityTypes = () => useQuery({
+    queryKey: ['activityTypes'],
+    queryFn: () => fromSupabase(supabase.rpc('get_activity_types')),
+});
