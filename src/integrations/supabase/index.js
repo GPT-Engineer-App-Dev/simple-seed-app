@@ -63,7 +63,7 @@ export const useAddActivity = () => {
 export const useUpdateActivity = () => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (updatedActivity) => fromSupabase(supabase.from('activity').update(updatedActivity).eq('id', updatedActivity.id)),
+        mutationFn: ({ id, ...updates }) => fromSupabase(supabase.from('activity').update(updates).eq('id', id)),
         onSuccess: () => {
             queryClient.invalidateQueries('activities');
         },
@@ -104,7 +104,7 @@ export const useAddUser = () => {
 export const useUpdateUser = () => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (updatedUser) => fromSupabase(supabase.from('users').update(updatedUser).eq('id', updatedUser.id)),
+        mutationFn: ({ id, ...updates }) => fromSupabase(supabase.from('users').update(updates).eq('id', id)),
         onSuccess: () => {
             queryClient.invalidateQueries('users');
         },
