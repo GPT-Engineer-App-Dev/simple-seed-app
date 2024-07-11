@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useAddActivity, useActivityTypes } from "@/integrations/supabase";
+import { useAddActivity } from "@/integrations/supabase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -9,7 +9,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 const CreateActivity = () => {
   const { register, handleSubmit, reset, setValue } = useForm();
   const { mutate: addActivity, isLoading, error } = useAddActivity();
-  const { data: activityTypes, isLoading: isLoadingTypes, error: errorTypes } = useActivityTypes();
+
+  const activityTypes = ["run", "ride", "swim"];
 
   const onSubmit = (data) => {
     addActivity(data, {
@@ -28,24 +29,18 @@ const CreateActivity = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
             <Label htmlFor="type">Type</Label>
-            {isLoadingTypes ? (
-              <p>Loading types...</p>
-            ) : errorTypes ? (
-              <p className="text-red-500">Error loading types</p>
-            ) : (
-              <Select onValueChange={(value) => setValue("type", value)}>
-                <SelectTrigger id="type">
-                  <SelectValue placeholder="Select activity type" />
-                </SelectTrigger>
-                <SelectContent>
-                  {activityTypes.map((type) => (
-                    <SelectItem key={type} value={type}>
-                      {type}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            )}
+            <Select onValueChange={(value) => setValue("type", value)}>
+              <SelectTrigger id="type">
+                <SelectValue placeholder="Select activity type" />
+              </SelectTrigger>
+              <SelectContent>
+                {activityTypes.map((type) => (
+                  <SelectItem key={type} value={type}>
+                    {type}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
           <div>
             <Label htmlFor="started_at">Started At</Label>
